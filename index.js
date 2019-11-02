@@ -4,7 +4,7 @@ const fs = require('fs')
 let flatData = []
 
 csv
-    .parseFile('./presidents.csv',{headers:true})
+    .parseFile('./biographies.csv',{headers:true})
     .on('error', error => console.error(error))
     .on('data', row => flatData.push(row))
     .on('end', rowCount => {
