@@ -1,15 +1,38 @@
 import React, { useState } from "react"
 import { Drawer } from '@material-ui/core';
+import { useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import FunFacts from "../components/funfacts"
 import "./index.css"
-import * as data from "../../tiers.json"
 
 const IndexPage = () => {
+  const data = useStaticQuery(graphql`
+    query MyQuery {
+      allTiersJson {
+        edges {
+          node {
+            id
+            President
+            Cons
+            Corruption
+            Genocide
+            Grade
+            Number
+            Pros
+            Rape
+            Slavery
+            Tier
+            War_Crimes
+          }
+        }
+      }
+    }  
+  `)  
   const tiers = []
-  data.forEach( (p,index) => {
+  data.allTiersJson.edges.forEach( (edge,index) => {
+    let p = edge.node
     if(!tiers[p.Tier]) tiers[p.Tier] = []
     tiers[p.Tier].push(p)
   })
