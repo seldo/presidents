@@ -15,7 +15,7 @@ function FunFacts({president}) {
       <h3>Fun facts:</h3>
       <p>Facts go here.</p>
       <div className="crimeList">
-        <h3>Crime list</h3>
+        <h3>Crime report</h3>
         { (president['Slavery'] || president['Genocide'] || president['War Crimes'] || president['Rape'] || president['Corruption']) ? (
           <ul>
           {(president['Slavery']) ? <li>😡 Owned slaves</li> : <></>}
