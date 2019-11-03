@@ -1,10 +1,11 @@
 import React, { useState } from "react"
-import { Link } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
+import { Drawer } from '@material-ui/core';
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { useStaticQuery, graphql } from "gatsby"
-
+import FunFacts from "../components/funfacts"
+import "./index.css"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -29,29 +30,60 @@ const IndexPage = () => {
       }
     }  
   `)
+  const tiers = []
+  data.allTiersJson.edges.forEach( (edge,index) => {
+    let p = edge.node
+    if(!tiers[p.Tier]) tiers[p.Tier] = []
+    tiers[p.Tier].push(p)
+  })
+  let tierOrder = ['Awesome','Great','Above average','Average','Below average','Awful','The worst']
   const [president,setPresident] = useState({})
+  const [drawerOpen,setDrawerOpen] = useState(false)
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen)
+  }
   return (
     <Layout>
       <SEO title="Home" />
-      <div style={{display: `flex`, flexDirection: `row`}}>
-        <div>
-          <ol>
-          {
-            data.allTiersJson.edges.map(({node},index) => {
-              return <li>
-                <div style={{ maxWidth: `100px`, marginBottom: `1.45rem` }}>
-                  <img style={{maxHeight: `80px`, borderRadius: `100%`}} src={"/presidents/"+node.Number+".jpg"} />
-                </div>
-                <p onMouseOver={() => setPresident(node)}>{node.President}</p>
+      <h1>
+        US Presidents, Ranked
+      </h1>
+      <div>
+        <ol className="tiersList">
+        {
+          tierOrder.map( (tier) => {
+            return (
+              <li key={tier}>
+                <h2>{tier}</h2>
+                <ol className="presidentList">
+                  {
+                    tiers[tier].map( (president) => {
+                      return <li
+                          key={president.Number}
+                          onTouchEnd={() => {
+                            setPresident(president)
+                            toggleDrawer()
+                          }}
+                        >
+                        <div className="imgHolder">
+                          <img 
+                            alt={president.Name}
+                            src={"/presidents/"+president.Number+".jpg"} 
+                          />
+                        </div>
+                      </li>
+                    })
+                  }
+                </ol>
               </li>
-            })
-          }
-          </ol>
-        </div>
-        <div>
-          {president.President}
-        </div>
+            )
+          })
+        }
+        </ol>
       </div>
+      <Drawer anchor="right" open={drawerOpen} onClose={() => toggleDrawer(president)}>
+        <FunFacts president={president}/>
+      </Drawer>
     </Layout>
   )
 }
