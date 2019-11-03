@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
+
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -28,17 +29,29 @@ const IndexPage = () => {
       }
     }  
   `)
+  const [president,setPresident] = useState({})
   return (
     <Layout>
       <SEO title="Home" />
-      <h1>Hi people</h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <p>Now go build something great.</p>
-      <h1>{data.allTiersJson.edges[0].node.President}</h1>
-      <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-        <img src="/presidents/1.jpg" />
+      <div style={{display: `flex`, flexDirection: `row`}}>
+        <div>
+          <ol>
+          {
+            data.allTiersJson.edges.map(({node},index) => {
+              return <li>
+                <div style={{ maxWidth: `100px`, marginBottom: `1.45rem` }}>
+                  <img style={{maxHeight: `80px`, borderRadius: `100%`}} src={"/presidents/"+node.Number+".jpg"} />
+                </div>
+                <p onMouseOver={() => setPresident(node)}>{node.President}</p>
+              </li>
+            })
+          }
+          </ol>
+        </div>
+        <div>
+          {president.President}
+        </div>
       </div>
-      <Link to="/page-2/">Go to page 2</Link>
     </Layout>
   )
 }
