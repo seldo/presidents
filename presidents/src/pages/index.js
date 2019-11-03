@@ -60,7 +60,7 @@ const IndexPage = () => {
                     tiers[tier].map( (president) => {
                       return <li
                           key={president.Number}
-                          onTouchEnd={() => {
+                          onClick={() => {
                             setPresident(president)
                             toggleDrawer()
                           }}
@@ -82,7 +82,7 @@ const IndexPage = () => {
         </ol>
       </div>
       <Drawer anchor="right" open={drawerOpen} onClose={() => toggleDrawer(president)}>
-        <FunFacts president={president}/>
+        <FunFacts president={president} passInClose={toggleDrawer}/>
       </Drawer>
     </Layout>
   )

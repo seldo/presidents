@@ -1,8 +1,9 @@
 import React from "react"
 
-function FunFacts({president}) {
+function FunFacts({president,passInClose}) {
+  console.log(president)
   return (
-    <div className="funFacts">
+    <div className="funFacts" onClick={passInClose}>
       <img 
         alt={president.Name}
         src={"/presidents/"+president.Number+".jpg"} 
@@ -16,11 +17,11 @@ function FunFacts({president}) {
       <p>Facts go here.</p>
       <div className="crimeList">
         <h3>Crime report</h3>
-        { (president['Slavery'] || president['Genocide'] || president['War Crimes'] || president['Rape'] || president['Corruption']) ? (
+        { (president['Slavery'] || president['Genocide'] || president['War_Crimes'] || president['Rape'] || president['Corruption']) ? (
           <ul>
           {(president['Slavery']) ? <li>😡 Owned slaves</li> : <></>}
           {(president['Genocide']) ? <li>😡 Genocide</li> : <></>}
-          {(president['War Crimes']) ? <li>😡 War crimes</li> : <></>}
+          {(president['War_Crimes']) ? <li>😡 War crimes</li> : <></>}
           {(president['Rape']) ? <li>😡 Sexual assault</li> : <></>}
           {(president['Corruption']) ? <li>😡 Corruption</li> : <></>}
           </ul>
