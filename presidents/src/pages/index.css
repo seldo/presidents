@@ -1,6 +1,9 @@
 body {
     box-sizing: border-box;
 }
+.seo {
+    display: none;
+}
 h1 {
     margin-top: 1rem;
     font-size: 180%;

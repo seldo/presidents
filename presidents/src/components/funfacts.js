@@ -1,13 +1,11 @@
 import React from "react"
+import PresidentImage from "./presidentImage"
 
 function FunFacts({president,passInClose}) {
   return (
     <div className="funFacts" onClick={passInClose}>
       <div className="imgContainer">
-        <img 
-          alt={president.Name}
-          src={"/presidents/"+president.Number+".jpg"} 
-        />
+        <PresidentImage number={president.Number} size="sidePanel"/>
       </div>
       <h2>{president.President}</h2>
       <h3>Pros:</h3>

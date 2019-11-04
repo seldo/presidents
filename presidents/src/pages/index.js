@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import FunFacts from "../components/funfacts"
 import "./index.css"
+import PresidentImage from "../components/presidentImage"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -63,19 +64,25 @@ const IndexPage = () => {
                 <ol className="presidentList">
                   {
                     tiers[tier].map( (president) => {
-                      return <li
-                          key={president.Number}
-                          onClick={() => {
+                      return <li key={president.Number}>
+                        <a
+                          alt={president.Name} 
+                          href={"/president/"+president.Number}
+                          onClick={(e) => {
+                            e.preventDefault()
                             setPresident(president)
                             toggleDrawer()
                           }}
                         >
-                        <div className="imgHolder">
-                          <img 
-                            alt={president.Name}
-                            src={"/presidents/"+president.Number+".jpg"} 
-                          />
-                        </div>
+                          <div>
+                            <div className="imgHolder">
+                              <PresidentImage number={president.Number} size="thumbnail"></PresidentImage>
+                            </div>
+                            <div className="seo">
+                              
+                            </div>
+                          </div>
+                        </a>
                       </li>
                     })
                   }
