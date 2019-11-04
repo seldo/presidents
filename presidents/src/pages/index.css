@@ -35,20 +35,26 @@ ol {
     overflow: hidden;
 }
 .funFacts {
-    width: 80%;
-}
-@media only screen and (max-width: 600px) {
-    .factsPanel {
-        display: none
-    }
-}
-.funFacts {
-    width: 300px;
     padding: 1em;
+}
+.MuiDrawer-paperAnchorRight {
+    width: 500px;
+}
+.funFacts .imgContainer {
+    text-align: center;
 }
 .funFacts img {
     border-radius: 1em;
     margin-bottom: 0.5em;
+    width: 80%;
+}
+@media only screen and (max-width: 600px) {
+    .MuiDrawer-paperAnchorRight {
+        width: 300px;        
+    }
+    .funFacts img {
+        width: 100%;
+    }
 }
 .funFacts h2 {
     font-size: 100%;

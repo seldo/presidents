@@ -14,17 +14,18 @@ const IndexPage = () => {
         edges {
           node {
             id
+            Tier
+            Number
             President
+            Pros
             Cons
+            Fun_Fact
             Corruption
             Genocide
-            Grade
-            Number
-            Pros
             Rape
             Slavery
-            Tier
             War_Crimes
+            Grade
           }
         }
       }
@@ -39,6 +40,7 @@ const IndexPage = () => {
   let tierOrder = ['Awesome','Great','Above average','Average','Below average','Awful','The worst']
   const [president,setPresident] = useState({})
   const [drawerOpen,setDrawerOpen] = useState(false)
+  const [hideBackdrop,setHideBackdrop] = useState(false)
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen)
   }
@@ -81,7 +83,7 @@ const IndexPage = () => {
         }
         </ol>
       </div>
-      <Drawer anchor="right" open={drawerOpen} onClose={() => toggleDrawer(president)}>
+      <Drawer anchor="right" hideBackdrop={hideBackdrop} disableAutoFocus={hideBackdrop} open={drawerOpen} onClose={() => toggleDrawer(president)}>
         <FunFacts president={president} passInClose={toggleDrawer}/>
       </Drawer>
     </Layout>

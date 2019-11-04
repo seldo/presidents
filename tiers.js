@@ -8,5 +8,5 @@ csv
     .on('error', error => console.error(error))
     .on('data', row => data.push(row))
     .on('end', rowCount => {
-        fs.writeFileSync('./tiers.json',JSON.stringify(data))
+        fs.writeFileSync('./presidents/tiers.json',JSON.stringify(data))
     })
