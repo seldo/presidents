@@ -79,3 +79,18 @@ ol {
     list-style-type: none;
     margin-bottom: 0px;
 }
+.about {
+    margin-top: 2em;
+    margin-left: -1em;
+    width: calc(100% + 2em);
+    background-color: #ddd;
+    padding: 1em;
+}
+footer {
+    font-size: 80%;
+    text-align: center;
+    margin-top: 0.5em;
+}
+footer a {
+    text-decoration: none;
+}

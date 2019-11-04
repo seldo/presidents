@@ -35,9 +35,6 @@ const Layout = ({ children }) => {
       >
         <Header siteTitle={data.site.siteMetadata.title} />
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()} <a href="http://seldo.com">Seldo.com</a>.
-        </footer>
       </div>
     </>
   )
