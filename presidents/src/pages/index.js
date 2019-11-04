@@ -46,7 +46,10 @@ const IndexPage = () => {
   }
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO 
+        title="US Presidents, Ranked" 
+        description="A list of all the US presidents, arbitrarily ranked by @seldo"
+      />
       <h1>
         US Presidents, Ranked
       </h1>
