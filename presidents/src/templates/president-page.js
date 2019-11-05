@@ -1,0 +1,20 @@
+import React from "react"
+import Layout from "../components/layout"
+import FunFacts from "../components/funfacts"
+
+import SEO from "../components/seo"
+
+export default ({ pageContext }) => {
+    let president = pageContext.president
+    return (
+        <Layout>
+            <SEO
+                title={`President ${president.President}`}
+                description="A list of all the US presidents, arbitrarily ranked by @seldo"
+            />
+            <div className="presidentPage">
+                <FunFacts president={president}/>
+            </div>
+        </Layout>
+    )
+}

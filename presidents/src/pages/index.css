@@ -111,3 +111,20 @@ footer {
 footer a {
     text-decoration: none;
 }
+.presidentPage {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.presidentPage .funFacts .imgContainer {    
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.presidentPage .funFacts h2 {
+    margin-top: 0.5em;
+    font-size: 150%;
+}
+.presidentPage .funFacts .closeCTA {
+    display: none;
+}

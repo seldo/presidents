@@ -3,12 +3,13 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
+const path = require('path')
 const fetch = require('node-fetch')
 
 const call = "https://sheets.googleapis.com/v4/spreadsheets/14pdn9yikv2ET9SNz2mcdAoh4On5sgHfkI-HbCEfrLdI/values/'Tiers'!A:L?key=" + process.env.GOOGLE_API_KEY
 let presidents = []
 
-exports.onPreBootstrap = async () => {
+const getPresidents = async () => {
     // get the presidents
     try {
         let response = await fetch(call)
@@ -27,6 +28,10 @@ exports.onPreBootstrap = async () => {
     }
 }
 
+exports.onPreBootstrap = async () => {
+    await getPresidents()
+}
+
 exports.onCreatePage = ({ page, actions }) => {
     const { createPage, deletePage } = actions
     deletePage(page)
@@ -39,6 +44,17 @@ exports.onCreatePage = ({ page, actions }) => {
     })
 }
 
-exports.onCreateNode = ({ node }) => {
-    console.log(node.internal)
+exports.createPages = async ({ actions, reporter }) => {
+    const { createPage } = actions
+    // Create pages for each president
+    const presidentPageTemplate = path.resolve(`src/templates/president-page.js`)
+    presidents.forEach((president) => {
+        createPage({
+            path: "/president/" + president.Number,
+            component: presidentPageTemplate,
+            context: {
+                president,
+            },
+        })
+    })
 }
