@@ -60,7 +60,8 @@ ol {
     }
 }
 .funFacts h2 {
-    font-size: 100%;
+    margin-top: 0.5em;
+    font-size: 110%;
     text-align: center;
 }
 .funFacts h3 {
@@ -117,14 +118,16 @@ footer a {
     margin-right: auto;
 }
 .presidentPage .funFacts .imgContainer {    
-    width: 40%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
 }
 .presidentPage .funFacts h2 {
-    margin-top: 0.5em;
     font-size: 150%;
 }
 .presidentPage .funFacts .closeCTA {
     display: none;
+}
+.presidentPage .backCTA {
+    text-align: center;
 }

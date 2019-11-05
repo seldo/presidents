@@ -14,6 +14,9 @@ export default ({ pageContext }) => {
             />
             <div className="presidentPage">
                 <FunFacts president={president}/>
+                <div class="backCTA">
+                    <a href="/">Back to index</a>
+                </div>
             </div>
         </Layout>
     )
