@@ -64,6 +64,12 @@ ol {
     font-size: 110%;
     text-align: center;
 }
+.funFacts h2 span {
+    display: block;
+    font-size: 80%;
+    font-weight: normal;
+    margin-top: 0.3em;
+}
 .funFacts h3 {
     font-size: 90%;
     margin-bottom: 0.5em;

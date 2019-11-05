@@ -7,7 +7,11 @@ function FunFacts({president,passInClose}) {
       <div className="imgContainer">
         <PresidentImage number={president.Number} size="sidePanel" alt={president.President}/>
       </div>
-      <h2>{president.President}</h2>
+      <h2>
+        #{president.Number}: {president.President}
+        <span>Lived {president.Lived}</span>
+        <span>In office {president['In Office']}</span>
+      </h2>
       <h3>Pros:</h3>
       <p>{president.Pros}</p>
       <h3>Cons:</h3>
