@@ -17,7 +17,7 @@ function FunFacts({president,passInClose}) {
       <h3>Cons:</h3>
       <p>{president.Cons}</p>
       <h3>Fun facts:</h3>
-      <p>{president['Fun Fact']}</p>
+      <p>{president['Fun fact']}</p>
       <div className="crimeList">
         <h3>Crime report</h3>
         { (president['Slavery'] || president['Genocide'] || president['War_Crimes'] || president['Rape'] || president['Corruption']) ? (
