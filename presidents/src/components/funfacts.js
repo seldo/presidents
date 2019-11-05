@@ -5,7 +5,7 @@ function FunFacts({president,passInClose}) {
   return (
     <div className="funFacts" onClick={passInClose}>
       <div className="imgContainer">
-        <PresidentImage number={president.Number} size="sidePanel"/>
+        <PresidentImage number={president.Number} size="sidePanel" alt={president.President}/>
       </div>
       <h2>{president.President}</h2>
       <h3>Pros:</h3>
@@ -28,6 +28,7 @@ function FunFacts({president,passInClose}) {
           <p>No known crimes!</p>
         )}
       </div>
+      <button className="closeCTA" onClick={passInClose}>Close</button>
     </div>
   )
 }

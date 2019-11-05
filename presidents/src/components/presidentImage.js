@@ -13,7 +13,7 @@ import Img from "gatsby-image"
  * - `useStaticQuery`: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-const PresidentImage = ({number,size}) => {
+const PresidentImage = ({number,size,alt}) => {
   const data = useStaticQuery(graphql`
     query {
       allFile(filter: {relativeDirectory: {eq: "presidents"}}, sort: {fields: relativePath, order: ASC}) {
@@ -41,9 +41,9 @@ const PresidentImage = ({number,size}) => {
     return (element.node.relativePath === `presidents/${number}.jpg`)
   })
   if(size == 'thumbnail') {
-    return <Img fixed={imgData.node.childImageSharp.thumbnail}/>
+    return <Img alt={alt} fixed={imgData.node.childImageSharp.thumbnail}/>
   } else {
-    return <Img fluid={imgData.node.childImageSharp.sidePanel}/>
+    return <Img alt={alt} fluid={imgData.node.childImageSharp.sidePanel}/>
   }
   
 }

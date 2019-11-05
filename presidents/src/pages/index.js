@@ -66,7 +66,7 @@ const IndexPage = () => {
                     tiers[tier].map( (president) => {
                       return <li key={president.Number}>
                         <a
-                          alt={president.Name} 
+                          alt={president.President} 
                           href={"/president/"+president.Number}
                           onClick={(e) => {
                             e.preventDefault()
@@ -76,10 +76,14 @@ const IndexPage = () => {
                         >
                           <div>
                             <div className="imgHolder">
-                              <PresidentImage number={president.Number} size="thumbnail"></PresidentImage>
+                              <PresidentImage 
+                                number={president.Number} 
+                                size="thumbnail"
+                                alt={president.President}
+                              />
                             </div>
                             <div className="seo">
-                              
+                              <FunFacts president={president}/>
                             </div>
                           </div>
                         </a>
