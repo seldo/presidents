@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Drawer } from '@material-ui/core';
-import { useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -8,40 +7,16 @@ import FunFacts from "../components/funfacts"
 import "./index.css"
 import PresidentImage from "../components/presidentImage"
 
-const IndexPage = () => {
-  const data = useStaticQuery(graphql`
-    query MyQuery {
-      allTiersJson {
-        edges {
-          node {
-            id
-            Tier
-            Number
-            President
-            Pros
-            Cons
-            Fun_Fact
-            Corruption
-            Genocide
-            Rape
-            Slavery
-            War_Crimes
-            Grade
-          }
-        }
-      }
-    }  
-  `)  
+const IndexPage = ({pageContext}) => {
+  const presidents = pageContext.presidents
   const tiers = []
-  data.allTiersJson.edges.forEach( (edge,index) => {
-    let p = edge.node
+  presidents.forEach( (p,index) => {
     if(!tiers[p.Tier]) tiers[p.Tier] = []
     tiers[p.Tier].push(p)
   })
   let tierOrder = ['Awesome','Great','Above average','Average','Below average','Awful','The worst']
   const [president,setPresident] = useState({})
   const [drawerOpen,setDrawerOpen] = useState(false)
-  const [hideBackdrop,setHideBackdrop] = useState(false)
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen)
   }
@@ -113,7 +88,7 @@ const IndexPage = () => {
       <footer>
         © {new Date().getFullYear()} <a href="https://twitter.com/seldo">@seldo</a>.
       </footer>
-      <Drawer anchor="right" hideBackdrop={hideBackdrop} disableAutoFocus={hideBackdrop} open={drawerOpen} onClose={() => toggleDrawer(president)}>
+      <Drawer anchor="right" open={drawerOpen} onClose={() => toggleDrawer(president)}>
         <FunFacts president={president} passInClose={toggleDrawer}/>
       </Drawer>
     </Layout>
