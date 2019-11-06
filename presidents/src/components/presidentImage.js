@@ -22,7 +22,7 @@ const PresidentImage = ({number,size,alt}) => {
             relativePath
             relativeDirectory
             childImageSharp {
-              thumbnail: fixed(width: 55, height: 65, cropFocus: CENTER) {
+              small: fixed(width: 55, height: 65, fit: COVER, cropFocus: CENTER) {
                 ...GatsbyImageSharpFixed
               }
               sidePanel: fluid(maxWidth: 500) {
@@ -40,8 +40,8 @@ const PresidentImage = ({number,size,alt}) => {
   let imgData = data.allFile.edges.find((element) => {
     return (element.node.relativePath === `presidents/${number}.jpg`)
   })
-  if(size == 'thumbnail') {
-    return <Img alt={alt} fixed={imgData.node.childImageSharp.thumbnail}/>
+  if(size === 'thumbnail') {
+    return <Img alt={alt} fixed={imgData.node.childImageSharp.small}/>
   } else {
     return <Img alt={alt} fluid={imgData.node.childImageSharp.sidePanel}/>
   }
