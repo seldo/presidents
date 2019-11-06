@@ -6,7 +6,10 @@
 const path = require('path')
 const fetch = require('node-fetch')
 
-const call = "https://sheets.googleapis.com/v4/spreadsheets/14pdn9yikv2ET9SNz2mcdAoh4On5sgHfkI-HbCEfrLdI/values/'Tiers'!A:L?key=" + process.env.GOOGLE_API_KEY
+if(!process.env.GOOGLE_API_KEY) {
+    throw new Exception("Must define env var GOOGLE_API_KEY")
+}
+const call = "https://sheets.googleapis.com/v4/spreadsheets/14pdn9yikv2ET9SNz2mcdAoh4On5sgHfkI-HbCEfrLdI/values/'Tiers'!A:O?key=" + process.env.GOOGLE_API_KEY
 let presidents = []
 
 const getPresidents = async () => {
