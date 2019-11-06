@@ -79,11 +79,14 @@ const IndexPage = ({pageContext}) => {
           Naturally, I ended up having some opinions about which presidents were better. I also wanted to play with Gatsby and Netlify. So I built this little website to do all those things.
         </p>
         <p>
-          It is important to note that these presidents are very much ranked <b>on a curve</b>; they are almost without fail huge assholes, many of whom committed atrocities. These rankings are only relative to the other presidents and not an absolute judgement of their worth as human beings.
-        </p>
-        <p>
           I welcome questions and suggestions <a href="https://twitter.com/seldo">on Twitter</a>, but it is pretty unlikely I will change my rankings as a result of you yelling at me.
         </p>
+        <h3>How can a war criminal be great?!</h3>
+        <p>
+          It is important to note that these presidents are very much ranked <b>on a curve</b>; they are almost without fail huge assholes, many of whom committed atrocities. These rankings are only relative to the other presidents and not an absolute judgement of their worth as human beings.
+        </p>
+        <h3>Why stop at Bush 41?</h3>
+        <p>The arbitrary line I stopped at is "last dead president". Carter is still alive, so biographies of him are incomplete. Once presidents die, people feel more free to say less complimentary things about them (for instance, everyone denied Eisenhower was having an affair, even though he <b>obviously</b> was having an affair, until he died). Add to that the problem that for more recent presidents, some of the things they did are still classified. New facts about Nixon's presidency were still being revealed in 2007, and Reagan and Carter's presidencies are still largely shrouded in secrecy. So I will update to include later presidents only upon their death.</p>
       </section>
       <footer>
         © {new Date().getFullYear()} <a href="https://twitter.com/seldo">@seldo</a>.
