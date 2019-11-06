@@ -11,7 +11,6 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
-    "fast-csv": "^3.4.0",
-    "gatsby-cli": "^2.8.8"
+    "fast-csv": "^3.4.0"
   }
 }
