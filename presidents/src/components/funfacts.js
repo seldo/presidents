@@ -18,6 +18,7 @@ function FunFacts({president,passInClose}) {
       <p>{president.Cons}</p>
       <h3>Fun facts:</h3>
       <p>{president['Fun fact']}</p>
+      <p><a href={president['Tweets']} target="_blank">A Twitter thread about {president.President}</a>.</p>
       <div className="crimeList">
         <h3>Crime report</h3>
         { (president['Slavery'] || president['Genocide'] || president['War Crimes'] || president['Rape'] || president['Corruption']) ? (
@@ -33,6 +34,7 @@ function FunFacts({president,passInClose}) {
         )}
       </div>
       <button className="closeCTA" onClick={passInClose}>Close</button>
+      <p className="swipeInstructions">You can swipe left or right or use arrow keys to move between presidents.</p>
     </div>
   )
 }

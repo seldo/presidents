@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { Drawer } from '@material-ui/core';
+import useEventListener from "@use-it/event-listener"
+import { useSwipeable, Swipeable } from 'react-swipeable'
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -17,9 +19,44 @@ const IndexPage = ({pageContext}) => {
   let tierOrder = ['Awesome','Great','Above average','Average','Below average','Awful','The worst']
   const [president,setPresident] = useState({})
   const [drawerOpen,setDrawerOpen] = useState(false)
+  
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen)
   }
+
+  const swipeHandlers = useSwipeable({ onSwiped: (eventData) => {
+    if(eventData.dir === "Right") {
+      advancePresident("back")
+    } else if (eventData.dir === "Left") {
+      advancePresident("forward")
+    }
+  }})
+
+  useEventListener('keydown', (e) => {
+    if(e.code === "ArrowLeft") {
+      advancePresident("back")
+    } else if (e.code === "ArrowRight") {
+      advancePresident("forward")
+    }
+  })
+
+  let advancePresident = (direction) => {
+    if(drawerOpen) {
+      let currentPresidentIndex = presidents.indexOf(president)
+      let nextIndex
+      if (direction === "back") {        
+        nextIndex = currentPresidentIndex - 1
+        if (nextIndex < 0) nextIndex = presidents.length - 1
+      } else if (direction === "forward") {
+        nextIndex = currentPresidentIndex + 1
+        if (nextIndex >= presidents.length) nextIndex = 0
+      } else {
+        return
+      }
+      setPresident(presidents[nextIndex])
+    }
+  }
+
   return (
     <Layout>
       <SEO 
@@ -91,7 +128,7 @@ const IndexPage = ({pageContext}) => {
       <footer>
         © {new Date().getFullYear()} <a href="https://twitter.com/seldo">@seldo</a>.
       </footer>
-      <Drawer anchor="right" open={drawerOpen} onClose={() => toggleDrawer(president)}>
+      <Drawer anchor="right" open={drawerOpen} onClose={() => toggleDrawer(president)} {...swipeHandlers}>
         <FunFacts president={president} passInClose={toggleDrawer}/>
       </Drawer>
     </Layout>

@@ -89,6 +89,10 @@ ol {
     list-style-type: none;
     margin-bottom: 0px;
 }
+.funFacts .swipeInstructions {
+    font-size: 80%;
+    text-align: center;
+}
 .funFacts .closeCTA {
     border: 0;
     background: none;
@@ -130,6 +134,9 @@ footer a {
 }
 .presidentPage .funFacts h2 {
     font-size: 150%;
+}
+.presidentPage .funFacts .swipeInstructions {
+    display: none;
 }
 .presidentPage .funFacts .closeCTA {
     display: none;
