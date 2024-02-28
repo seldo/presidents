@@ -4,7 +4,6 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 const path = require('path')
-const fetch = require('node-fetch')
 
 if(!process.env.GOOGLE_API_KEY) {
     throw new Error("Must define env var GOOGLE_API_KEY")
@@ -15,6 +14,7 @@ let presidents = []
 const getPresidents = async () => {
     // get the presidents
     try {
+        let fetch = await import('node-fetch')
         let response = await fetch(call)
         let json = await response.json()
         let headers = json.values.shift()

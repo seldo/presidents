@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Drawer } from '@material-ui/core';
+import { Drawer } from '@mui/material'
 import useEventListener from "@use-it/event-listener"
 import { useSwipeable, Swipeable } from 'react-swipeable'
 
