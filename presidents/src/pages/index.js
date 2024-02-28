@@ -27,6 +27,7 @@ const IndexPage = ({ pageContext }) => {
   ]
   const [president, setPresident] = useState({})
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [searchInput, setSearchInput] = useState("")
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen)
@@ -67,6 +68,29 @@ const IndexPage = ({ pageContext }) => {
     }
   }
 
+  let handleSearchInputChange = e => {
+    setSearchInput(e.currentTarget.value)
+  }
+
+  let searchQuery = searchInput.trim().toLocaleLowerCase()
+
+  let results = tierOrder
+    .map(tier => {
+      return {
+        tier,
+        presidents: tiers[tier].filter(president => {
+          if (searchInput === "") return true
+          return (
+            president.President.toLocaleLowerCase().includes(searchQuery) ||
+            president.Number === searchQuery
+          )
+        }),
+      }
+    })
+    .filter(item => {
+      return item.presidents.length > 0
+    })
+
   return (
     <Layout>
       <SEO
@@ -75,45 +99,58 @@ const IndexPage = ({ pageContext }) => {
       />
       <h1>US Presidents, Ranked</h1>
       <div>
-        <ol className="tiersList">
-          {tierOrder.map(tier => {
-            return (
-              <li key={tier}>
-                <h2>{tier}</h2>
-                <ol className="presidentList">
-                  {tiers[tier].map(president => {
-                    return (
-                      <li key={president.Number}>
-                        <a
-                          alt={president.President}
-                          href={"/president/" + president.Number}
-                          onClick={e => {
-                            e.preventDefault()
-                            setPresident(president)
-                            toggleDrawer()
-                          }}
-                        >
-                          <div>
-                            <div className="imgHolder">
-                              <PresidentImage
-                                number={president.Number}
-                                size="thumbnail"
-                                alt={president.President}
-                              />
+        <input
+          className="searchInput"
+          type="search"
+          placeholder="Search..."
+          value={searchInput}
+          onChange={handleSearchInputChange}
+        />
+        {searchInput && results.length === 0 && (
+          <p className="noResults">No results found</p>
+        )}
+        {results.length > 0 && (
+          <ol className="tiersList">
+            {results.map(item => {
+              let { tier, presidents } = item
+              return (
+                <li key={tier}>
+                  <h2>{tier}</h2>
+                  <ol className="presidentList">
+                    {presidents.map(president => {
+                      return (
+                        <li key={president.Number}>
+                          <a
+                            alt={president.President}
+                            href={"/president/" + president.Number}
+                            onClick={e => {
+                              e.preventDefault()
+                              setPresident(president)
+                              toggleDrawer()
+                            }}
+                          >
+                            <div>
+                              <div className="imgHolder">
+                                <PresidentImage
+                                  number={president.Number}
+                                  size="thumbnail"
+                                  alt={president.President}
+                                />
+                              </div>
+                              <div className="seo">
+                                <FunFacts president={president} />
+                              </div>
                             </div>
-                            <div className="seo">
-                              <FunFacts president={president} />
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                    )
-                  })}
-                </ol>
-              </li>
-            )
-          })}
-        </ol>
+                          </a>
+                        </li>
+                      )
+                    })}
+                  </ol>
+                </li>
+              )
+            })}
+          </ol>
+        )}
       </div>
       <section className="about">
         <h2>What is this?</h2>
