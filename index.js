@@ -16,7 +16,7 @@ csv
                 <blockquote class="twitter-tweet">
                     <a href="${row['Tweets']}">Tweet</a>
                 </blockquote>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </li>`
         })
 
