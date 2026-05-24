@@ -1,0 +1,16 @@
+{
+  "name": "presidents",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bios": "node ./index.js",
+    "tiers-data": "node ./tiers.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "fast-csv": "^3.4.0"
+  }
+}

@@ -1,16 +1,23 @@
 {
   "name": "presidents",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "bios": "node ./index.js",
-    "tiers-data": "node ./tiers.js"
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
   },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {},
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
   "dependencies": {
-    "fast-csv": "^3.4.0"
+    "@astrojs/react": "^5.0.5",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^6.3.7",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-swipeable": "^7.0.2"
   }
 }

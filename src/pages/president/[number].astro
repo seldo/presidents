@@ -1,0 +1,26 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import FunFacts from "../../components/FunFacts";
+import { getPresidents } from "../../data/presidents";
+
+export async function getStaticPaths() {
+  const presidents = await getPresidents();
+  return presidents.map((p) => ({
+    params: { number: p.Number },
+    props: { president: p },
+  }));
+}
+
+const { president } = Astro.props;
+---
+<Layout
+  title={`President ${president.President}`}
+  description="A list of all the US presidents, arbitrarily ranked by @seldo"
+>
+  <div class="presidentPage">
+    <FunFacts president={president} showSwipeHint={false} />
+    <div class="backCTA">
+      <a href="/">Back to index</a>
+    </div>
+  </div>
+</Layout>
