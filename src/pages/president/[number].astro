@@ -12,11 +12,51 @@ export async function getStaticPaths() {
 }
 
 const { president } = Astro.props;
+
+const ordinal = (n: number) => {
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+};
+
+const num = parseInt(president.Number, 10);
+const title = `${president.President} — ${president.Tier} — US Presidents, Ranked`;
+
+const summary = (president.Pros || president["Fun fact"] || "")
+  .replace(/\s+/g, " ")
+  .trim();
+const description =
+  `The ${ordinal(num)} US President, ranked "${president.Tier}". ${summary}`
+    .slice(0, 300);
+
+const image = `/presidents/${president.Number}.jpg`;
+const siteOrigin = Astro.site!.toString().replace(/\/$/, "");
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  url: `${siteOrigin}/president/${president.Number}/`,
+  mainEntity: {
+    "@type": "Person",
+    name: president.President,
+    description: summary,
+    image: `${siteOrigin}${image}`,
+    jobTitle: `${ordinal(num)} President of the United States`,
+  },
+};
 ---
 <Layout
-  title={`President ${president.President}`}
-  description="A list of all the US presidents, arbitrarily ranked by @seldo"
+  title={title}
+  description={description}
+  image={image}
+  ogType="profile"
 >
+  <script
+    slot="head"
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(jsonLd)}
+  />
   <div class="presidentPage">
     <FunFacts president={president} showSwipeHint={false} />
     <div class="backCTA">

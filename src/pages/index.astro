@@ -7,7 +7,12 @@ const presidents = await getPresidents();
 const year = new Date().getFullYear();
 ---
 <Layout title="US Presidents, Ranked">
-  <h1>US Presidents, Ranked</h1>
+  <header class="hero">
+    <h1>The Presidents, Ranked</h1>
+    <span class="kicker">
+      An arbitrary and opinionated ranking of every US president up to George HW Bush, by <a href="https://twitter.com/seldo">@seldo</a>.
+    </span>
+  </header>
   <TierList client:load presidents={presidents} tierOrder={TIER_ORDER} />
 
   <section class="about">
@@ -27,6 +32,6 @@ const year = new Date().getFullYear();
     <p>The arbitrary line I stopped at is "last dead president". Carter is still alive, so biographies of him are incomplete. Once presidents die, people feel more free to say less complimentary things about them (for instance, everyone denied Eisenhower was having an affair, even though he <b>obviously</b> was having an affair, until he died). Add to that the problem that for more recent presidents, some of the things they did are still classified. New facts about Nixon's presidency were still being revealed in 2007, and Reagan and Carter's presidencies are still largely shrouded in secrecy. So I will update to include later presidents only upon their death.</p>
   </section>
   <footer>
-    © {year} <a href="https://twitter.com/seldo">@seldo</a>.
+    © 2021 <a href="https://bsky.app/profile/seldo.com">Laurie Voss</a> | <a href="https://github.com/seldo/presidents">Source on GitHub</a>
   </footer>
 </Layout>

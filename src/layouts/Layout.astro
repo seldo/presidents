@@ -2,10 +2,19 @@
 interface Props {
   title: string;
   description?: string;
+  image?: string; // path relative to site root, e.g. /presidents/16.jpg
+  ogType?: "website" | "article" | "profile";
 }
 
-const { title, description = "A list of all the US presidents, arbitrarily ranked by @seldo" } = Astro.props;
-const siteTitle = "US Presidents, Ranked";
+const {
+  title,
+  description = "A ranked, opinionated list of every US president up to George HW Bush, by @seldo.",
+  image = "/presidents/1.jpg",
+  ogType = "website",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const imageUrl = new URL(image, Astro.site).toString();
 ---
 <!doctype html>
 <html lang="en">
@@ -13,16 +22,27 @@ const siteTitle = "US Presidents, Ranked";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:site_name" content="US Presidents, Ranked" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@seldo" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://presidents.fyi/presidents/1.jpg" />
+    <meta name="twitter:image" content={imageUrl} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <slot name="head" />
   </head>
   <body>
     <div class="page">

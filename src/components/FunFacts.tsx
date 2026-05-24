@@ -3,10 +3,12 @@ import type { President } from "../data/presidents";
 type Props = {
   president: President;
   onClose?: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
   showSwipeHint?: boolean;
 };
 
-export default function FunFacts({ president, onClose, showSwipeHint = true }: Props) {
+export default function FunFacts({ president, onClose, onPrev, onNext, showSwipeHint = true }: Props) {
   const hasCrimes =
     president.Slavery ||
     president.Genocide ||
@@ -15,15 +17,54 @@ export default function FunFacts({ president, onClose, showSwipeHint = true }: P
     president.Corruption;
 
   return (
-    <div className="funFacts" onClick={onClose}>
+    <div className="funFacts">
+      {(onPrev || onNext || onClose) && (
+        <div className="drawerNav">
+          {onPrev ? (
+            <button
+              className="navBtn"
+              onClick={onPrev}
+              aria-label="Previous president"
+            >
+              ← Prev
+            </button>
+          ) : (
+            <span />
+          )}
+          {onClose && (
+            <button
+              className="navBtn closeBtn"
+              onClick={onClose}
+              aria-label="Close"
+            >
+              Close
+            </button>
+          )}
+          {onNext ? (
+            <button
+              className="navBtn"
+              onClick={onNext}
+              aria-label="Next president"
+            >
+              Next →
+            </button>
+          ) : (
+            <span />
+          )}
+        </div>
+      )}
       <div className="imgContainer">
         <img src={`/presidents/${president.Number}.jpg`} alt={president.President} />
       </div>
       <h2>
-        #{president.Number}: {president.President}
-        <span>Lived {president.Lived}</span>
-        <span>In office {president["In Office"]}</span>
+        <span className="num">№ {president.Number}</span>
+        {president.President}
       </h2>
+      <div className="lifespan">
+        {president.Lived && <span>Lived {president.Lived}</span>}
+        {president.Lived && president["In Office"] && <span>·</span>}
+        {president["In Office"] && <span>In office {president["In Office"]}</span>}
+      </div>
       <h3>Pros:</h3>
       <p>{president.Pros}</p>
       <h3>Cons:</h3>
@@ -52,14 +93,9 @@ export default function FunFacts({ president, onClose, showSwipeHint = true }: P
           <p>No known crimes!</p>
         )}
       </div>
-      {onClose && (
-        <button className="closeCTA" onClick={onClose}>
-          Close
-        </button>
-      )}
       {showSwipeHint && (
         <p className="swipeInstructions">
-          You can swipe left or right or use arrow keys to move between presidents.
+          Use the buttons above, swipe, or arrow keys to move between presidents.
         </p>
       )}
     </div>

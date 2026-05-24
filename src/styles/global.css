@@ -1,118 +1,210 @@
-/* Reset + base typography (ported from legacy Gatsby site) */
-html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  font: 112.5%/1.45em georgia, serif;
-  box-sizing: border-box;
-  overflow-y: scroll;
+/* Editorial redesign */
+
+:root {
+  --bg: #f7f3eb;
+  --ink: #1a1814;
+  --ink-soft: #5a544a;
+  --rule: #d9d2c2;
+  --accent: #a8341e;
+  --card-bg: #fffdf8;
 }
-body {
-  margin: 0;
+
+* { box-sizing: border-box; }
+
+html {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
-  word-wrap: break-word;
-  font-kerning: normal;
-  font-feature-settings: "kern", "liga", "clig", "calt";
-  box-sizing: border-box;
 }
-*, *:before, *:after { box-sizing: inherit; }
 
-a { background-color: transparent; }
-img { max-width: 100%; border-style: none; }
+body { margin: 0; }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 1.45rem;
-  color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-weight: bold;
-  text-rendering: optimizeLegibility;
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.01em;
   line-height: 1.1;
 }
-h1 { font-size: 2.25rem; }
-h2 { font-size: 1.62671rem; }
-h3 { font-size: 1.38316rem; }
-h4 { font-size: 1rem; }
 
-p, ul, ol, figure, blockquote { margin: 0 0 1.45rem; }
-ul, ol { margin-left: 1.45rem; padding: 0; }
-li { margin-bottom: calc(1.45rem / 2); }
-b, strong { font-weight: bold; }
+p { margin: 0 0 1em; }
 
-@media only screen and (max-width: 480px) {
-  html { font-size: 100%; }
-}
-
-/* Page layout */
+/* Page shell */
 .page {
+  max-width: 1200px;
   margin: 0 auto;
-  max-width: 960px;
-  padding: 0 1.0875rem 1.45rem;
+  padding: 4rem 2rem 6rem;
 }
 
-/* Index page */
-h1 { margin-top: 1rem; font-size: 180%; }
-.seo { display: none; }
-.tiersList { margin: 0; padding: 0; }
-.tiersList > li { list-style-type: none; }
-.tiersList h2 { font-size: 100%; margin-bottom: 0.5em; }
-.presidentList {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
+@media (max-width: 600px) {
+  .page { padding: 2rem 1.25rem 4rem; }
 }
-.presidentList li {
-  max-width: 70px;
+
+/* Hero */
+.hero {
   text-align: center;
-  font-size: 80%;
-  margin-right: 0.5em;
-  list-style: none;
+  margin-bottom: 5rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--rule);
 }
-.presidentList a { text-decoration: none; color: inherit; }
-.presidentList .imgHolder {
-  width: 55px;
-  height: 65px;
-  border-radius: 100%;
-  overflow: hidden;
+.hero h1 {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
 }
-.presidentList .imgHolder img {
-  width: 55px;
-  height: 65px;
-  object-fit: cover;
-  object-position: center;
+.hero .kicker {
   display: block;
+  margin-top: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* About */
+/* Tier sections */
+.tiersList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.tiersList > li {
+  margin-bottom: 4.5rem;
+}
+.tiersList > li:last-child { margin-bottom: 0; }
+
+.tierLabel {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+.tierLabel .roman {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+.tierLabel h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Cards */
+.presidentList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.5rem 1.25rem;
+}
+.presidentList li { margin: 0; }
+.presidentList a {
+  display: block;
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.18s ease;
+}
+.presidentList a:hover { text-decoration: none; transform: translateY(-3px); }
+.presidentList a:hover .name { color: var(--accent); }
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+.card .imgHolder {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--card-bg);
+  border-radius: 2px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 8px 20px -12px rgba(0,0,0,0.18);
+  margin-bottom: 0.75rem;
+}
+.card .imgHolder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.4s ease;
+}
+.presidentList a:hover .card .imgHolder img { transform: scale(1.04); }
+.card .name {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  transition: color 0.15s ease;
+}
+.card .meta {
+  margin-top: 0.2rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+/* About section */
 .about {
-  margin-top: 2em;
-  margin-left: -1em;
-  width: calc(100% + 2em);
-  background-color: #ddd;
-  padding: 1em;
+  margin-top: 6rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--rule);
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
 }
+.about h2 {
+  font-size: 2rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+.about h3 {
+  font-size: 1.25rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0.6rem;
+}
+.about p {
+  color: var(--ink);
+  margin-bottom: 1.1em;
+}
+
 footer {
-  font-size: 80%;
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
   text-align: center;
-  margin-top: 0.5em;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
 }
-footer a { text-decoration: none; }
 
 /* Drawer */
 .drawerBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(20, 18, 14, 0.55);
   z-index: 1000;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease;
+  backdrop-filter: blur(2px);
 }
 .drawerBackdrop.open { opacity: 1; pointer-events: auto; }
 .drawerPanel {
@@ -120,83 +212,155 @@ footer a { text-decoration: none; }
   top: 0;
   right: 0;
   bottom: 0;
-  width: 500px;
+  width: 560px;
   max-width: 100vw;
-  background: #fff;
-  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+  background: var(--card-bg);
+  box-shadow: -8px 0 30px -8px rgba(0,0,0,0.25);
   z-index: 1001;
   overflow-y: auto;
   transform: translateX(100%);
-  transition: transform 0.25s ease;
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .drawerPanel.open { transform: translateX(0); }
-@media only screen and (max-width: 600px) {
-  .drawerPanel { width: 300px; }
+@media (max-width: 600px) {
+  .drawerPanel { width: 100vw; }
 }
 
-/* Fun facts (drawer body and standalone president page) */
-.funFacts { padding: 1em; }
-.funFacts .imgContainer { text-align: center; }
-.funFacts img {
-  border-radius: 1em;
-  margin-bottom: 0.5em;
-  width: 80%;
+/* Fun facts */
+.funFacts { padding: 0 2.5rem 3rem; }
+@media (max-width: 600px) {
+  .funFacts { padding: 0 1.5rem 2.5rem; }
 }
-@media only screen and (max-width: 600px) {
-  .funFacts img { width: 100%; }
+
+/* Sticky drawer nav */
+.drawerNav {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--rule);
+}
+.drawerNav .navBtn {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.5rem 0.9rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.drawerNav .navBtn:hover { border-color: var(--accent); color: var(--accent); }
+.drawerNav .navBtn:first-child { justify-self: start; }
+.drawerNav .navBtn:last-child { justify-self: end; }
+.drawerNav .closeBtn { justify-self: center; }
+.funFacts .imgContainer {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.funFacts .imgContainer img {
+  width: 70%;
+  max-width: 280px;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.05), 0 20px 40px -16px rgba(0,0,0,0.25);
 }
 .funFacts h2 {
-  margin-top: 0.5em;
-  font-size: 110%;
+  font-size: 1.75rem;
+  font-weight: 600;
   text-align: center;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
 }
-.funFacts h2 span {
+.funFacts h2 .num {
   display: block;
-  font-size: 80%;
-  font-weight: normal;
-  margin-top: 0.3em;
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.04em;
 }
-.funFacts h3 { font-size: 90%; margin-bottom: 0.5em; }
+.funFacts .lifespan {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 2rem;
+  letter-spacing: 0.02em;
+}
+.funFacts .lifespan span { display: inline-block; margin: 0 0.5rem; }
+.funFacts h3 {
+  font-family: "Inter", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.funFacts p { color: var(--ink); font-size: 0.98rem; }
 .funFacts .crimeList {
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1em;
-  border: 1px solid #ccc;
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 2px;
 }
-.funFacts .crimeList ul { margin: 0; padding: 0; }
+.funFacts .crimeList h3 { margin-top: 0; color: var(--ink); }
+.funFacts .crimeList ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 .funFacts .crimeList ul li {
-  list-style-type: none;
-  margin-bottom: 0;
+  padding: 0.2rem 0;
+  font-size: 0.95rem;
+}
+.funFacts .crimeList p {
+  margin: 0;
+  font-style: italic;
+  color: var(--ink-soft);
 }
 .funFacts .swipeInstructions {
-  font-size: 80%;
+  margin-top: 1rem;
+  font-size: 0.75rem;
   text-align: center;
+  color: var(--ink-soft);
+  font-style: italic;
 }
-.funFacts .closeCTA {
-  border: 0;
-  background: none;
-  width: 100%;
-  margin-top: 2em;
-  text-transform: uppercase;
-  font-size: 70%;
-  cursor: pointer;
-}
-.funFacts .closeCTA::before { content: '['; }
-.funFacts .closeCTA::after { content: ']'; }
 
-/* Standalone president page tweaks */
+/* Standalone president page */
 .presidentPage {
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 38rem;
+  margin: 0 auto;
 }
-.presidentPage .funFacts .imgContainer {
+.presidentPage .funFacts { padding: 0; }
+.presidentPage .funFacts .imgContainer img {
   width: 60%;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 320px;
 }
-.presidentPage .funFacts h2 { font-size: 150%; }
-.presidentPage .funFacts .swipeInstructions { display: none; }
-.presidentPage .funFacts .closeCTA { display: none; }
-.presidentPage .backCTA { text-align: center; }
+.presidentPage .funFacts h2 { font-size: 2.5rem; }
+.presidentPage .backCTA {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.seo { position: absolute; left: -9999px; }
